@@ -49,7 +49,7 @@ mainCyclist.scale=0.07;
   
 //set collider for mainCyclist
 //mainCyclist.setCollider("cirle",0,0,20);
-
+mainCyclist.setCollider("rectangle",0,0,40,40);
   
 gameOver = createSprite(650,150);
 gameOver.addImage(gameOverImg);
@@ -122,31 +122,30 @@ function draw() {
       player3.addAnimation("opponentPlayer3",oppRed2Img);
     }
     
-}else if (gameState === END) {
-    gameOver.visible = true;
-    //Add code to show restart game instrution in text here
+}
+else if (gameState === END) {
+  gameOver.visible = true;
 
-  text("press up arrow key", 300,300);
-    if(keyDown(UP_ARROW))
-  {
-    reset()
+  textSize(20);
+  fill(255);
+  text("Press Up Arrow to Restart the game!", 500,200);
+
+  path.velocityX = 0;
+  mainCyclist.velocityY = 0;
+  mainCyclist.addAnimation("SahilRunning",mainRacerImg2);
+
+  pinkCG.setVelocityXEach(0);
+  pinkCG.setLifetimeEach(-1);
+
+  yellowCG.setVelocityXEach(0);
+  yellowCG.setLifetimeEach(-1);
+
+  redCG.setVelocityXEach(0);
+  redCG.setLifetimeEach(-1);
+  
+  if(keyDown("UP_ARROW")) {
+    reset();
   }
-  
-  
-    path.velocityX = 0;
-    mainCyclist.velocityY = 0;
-    mainCyclist.addAnimation("SahilRunning",mainRacerImg2);
-  
-    pinkCG.setVelocityXEach(0);
-    pinkCG.setLifetimeEach(-1);
-  
-    yellowCG.setVelocityXEach(0);
-    yellowCG.setLifetimeEach(-1);
-  
-    redCG.setVelocityXEach(0);
-    redCG.setLifetimeEach(-1);
-
-    //write condition for calling reset( )
 }
 }
 
@@ -154,10 +153,12 @@ function reset()
 {
   gameState = PLAY;
   gameOver.visible = false;
-  mainCyclist.addAnimation(mainRacerImg1);
-
+  mainCyclist.addAnimation("SahilRunning",mainRacerImg1);
+  
   pinkCG.destroyEach();
-
+  yellowCG.destroyEach();
+  redCG.destroyEach();
+  
   distance = 0;
 }
 
